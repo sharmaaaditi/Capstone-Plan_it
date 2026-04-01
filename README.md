@@ -40,9 +40,7 @@ This project demonstrates core JavaScript concepts including API integration, dy
 
 ---
 # 🌐 APIs Used
-- 
-
-- 
+- OpenWeather
 
 ---
 

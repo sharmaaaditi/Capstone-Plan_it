@@ -1,0 +1,63 @@
+body{
+    font-family: Georgia;
+    text-align: center;
+    padding: 20px;
+    background: url("https://img.freepik.com/free-vector/beautiful-white-cloud-blue-sky-background_1035-23406.jpg?w=360")no-repeat  center;
+    background-size: cover;
+
+}
+
+h1{
+    
+    font-size: 40px;
+    color: white;
+    letter-spacing: 1px;
+    color: #333;
+    margin-bottom: 80px;
+}
+input,button{
+    
+    font-size: 16px;
+}
+input{
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    width: 250px;
+}
+button{
+    margin:30px;
+    padding: 12px 20px;
+  border-radius: 25px;
+  border: none;
+  
+  background: #4facfe;
+  color: white;
+  cursor: pointer;
+
+    
+}
+button:hover{
+    background: #00c6ff;
+    
+}
+#weather{
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    display:inline-block;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+@media(max-width:600px){
+    input{
+        width:80%;
+    }
+}
