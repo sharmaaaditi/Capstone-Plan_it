@@ -1,0 +1,152 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, rgba(8,15,23,0.8), rgba(29,38,51,0.8)),
+                url('https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* Search */
+.search-top {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 50px;
+    justify-content: center;
+}
+
+.search-top input {
+    width: 60%;
+    padding: 15px 25px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-size: 16px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.search-top input::placeholder { color: rgba(255,255,255,0.6); }
+
+.search-top button {
+    padding: 15px 30px;
+    border-radius: 30px;
+    border: none;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.search-top button:hover { background: rgba(255,255,255,0.4); }
+
+.error { position: absolute; bottom: -30px; color: #ff6b6b; font-weight: 500; }
+.hidden { display: none !important; }
+
+/* Main Layout */
+.glass-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    max-width: 1000px;
+    flex-wrap: wrap;
+}
+
+.left-panel {
+    flex: 1;
+    min-width: 300px;
+    margin-top: 40px;
+    text-align: center;
+}
+
+#currentTemp { font-size: 8rem; font-weight: 300; }
+#currentIcon { width: 120px; height: 120px; filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); }
+#cityName { font-size: 2.8rem; font-weight: 500; margin-bottom: 5px; }
+.current-details { font-size: 1.3rem; color: rgba(255,255,255,0.8); }
+.weather-desc { margin-top: 10px; font-size: 1.1rem; color: rgba(255,255,255,0.6); text-transform: capitalize; }
+
+.right-panel {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    min-width: 350px;
+}
+
+/* Glass Boxes */
+.glass-box {
+    background: rgba(25,30,45,0.6);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 25px 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.alert-text, .widget-title {
+    font-size: 1rem;
+    color: #e0e0e0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Hourly */
+.intervals-list { display: flex; justify-content: space-between; text-align: center; overflow-x: auto; }
+.interval-item { display: flex; flex-direction: column; align-items: center; gap: 5px; min-width: 50px; }
+.interval-item span { font-weight: 500; }
+.interval-item img { width: 45px; height: 45px; }
+
+/* Daily */
+.daily-list { display: flex; flex-direction: column; gap: 20px; }
+.daily-row { display: flex; align-items: center; justify-content: space-between; }
+.day-name { width: 60px; font-size: 1.1rem; color: rgba(255,255,255,0.9); }
+.daily-row img { width: 40px; height: 40px; }
+.temp-min { width: 50px; text-align: right; color: rgba(255,255,255,0.6); font-weight: 500; }
+.temp-max { width: 50px; text-align: left; font-weight: 500; }
+
+/* Temp Bar */
+.temp-bar-container {
+    flex: 1;
+    margin: 0 15px;
+    height: 5px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+.temp-bar {
+    position: absolute;
+    height: 100%;
+    background: linear-gradient(90deg, #2b5876, #4e4376, #00f2fe);
+    border-radius: 5px;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    .glass-container { flex-direction: column; align-items: center; }
+    .left-panel { margin-top: 0; }
+    .search-top { flex-direction: column; align-items: center; }
+    .search-top input, .search-top button { width: 100%; max-width: 400px; }
+    #currentTemp { font-size: 6rem; }
+}
