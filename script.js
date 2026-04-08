@@ -1,4 +1,5 @@
 const API_KEY = '28f6a62062209a281316c98263273c2b';
+
 // Get HTML elements
 const cityInput = document.getElementById('cityInput');
 const searchBtn = document.getElementById('searchBtn');
@@ -31,6 +32,7 @@ async function fetchWeatherData(city) {
         console.error("Error:", error);
     }
 }
+
 function displayWeather(data) {
     // Current weather (left panel)
     const current = data.list[0];
@@ -59,4 +61,63 @@ function displayWeather(data) {
         alert = `${bad.weather[0].description.charAt(0).toUpperCase() + bad.weather[0].description.slice(1)} expected around ${time.toLocaleTimeString([],{hour:'2-digit', minute:'2-digit'})}`;
     }
     document.getElementById('intervalAlert').innerText = alert;
+
+    // Create hourly items
+    for (let i = 0; i < 6; i++) {
+        const item = data.list[i];
+        const time = new Date(item.dt * 1000);
+        const label = i === 0 ? "Now" : time.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        const div = document.createElement('div');
+        div.className = 'interval-item';
+        div.innerHTML = `<span>${label}</span><img src="https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png" alt="icon"><span>${Math.round(item.main.temp)}°C</span>`;
+        intervalDiv.appendChild(div);
+    }
+
+    // 5-day forecast (bottom right)
+    const dailyDiv = document.getElementById('dailyContainer');
+    dailyDiv.innerHTML = '';
+
+    // Group by day
+    const daily = {};
+    data.list.forEach(item => {
+        const date = item.dt_txt.split(' ')[0];
+        if (!daily[date]) {
+            daily[date] = { min: item.main.temp_min, max: item.main.temp_max, icon: item.weather[0].icon, ts: item.dt * 1000 };
+        } else {
+            daily[date].min = Math.min(daily[date].min, item.main.temp_min);
+            daily[date].max = Math.max(daily[date].max, item.main.temp_max);
+        }
+    });
+
+    const days = Object.keys(daily).slice(0, 5);
+
+    // Overall min/max for bars
+    let minAll = 100, maxAll = -100;
+    days.forEach(d => {
+        minAll = Math.min(minAll, daily[d].min);
+        maxAll = Math.max(maxAll, daily[d].max);
+    });
+    const range = maxAll - minAll || 1;
+
+    // Create rows
+    days.forEach((date, idx) => {
+        const info = daily[date];
+        const minT = Math.round(info.min);
+        const maxT = Math.round(info.max);
+        const dayName = idx === 0 ? "Today" : new Date(info.ts).toLocaleDateString('en-US', { weekday: 'short' });
+        const left = ((info.min - minAll) / range) * 100;
+        const width = ((info.max - info.min) / range) * 100;
+        const row = document.createElement('div');
+        row.className = 'daily-row';
+        row.innerHTML = `
+            <div class="day-name">${dayName}</div>
+            <img src="https://openweathermap.org/img/wn/${info.icon}@2x.png" alt="icon">
+            <div class="temp-min">${minT}°C</div>
+            <div class="temp-bar-container">
+                <div class="temp-bar" style="left: ${left}%; width: ${Math.max(width, 5)}%;"></div>
+            </div>
+            <div class="temp-max">${maxT}°C</div>
+        `;
+        dailyDiv.appendChild(row);
+    });
 }
