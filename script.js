@@ -31,4 +31,32 @@ async function fetchWeatherData(city) {
         console.error("Error:", error);
     }
 }
+function displayWeather(data) {
+    // Current weather (left panel)
+    const current = data.list[0];
+    document.getElementById('cityName').innerText = data.city.name;
+    document.getElementById('currentTemp').innerText = `${Math.round(current.main.temp)}°C`;
+    document.getElementById('currentIcon').src = `https://openweathermap.org/img/wn/${current.weather[0].icon}@4x.png`;
+    document.getElementById('currentDesc').innerText = current.weather[0].description;
+    document.getElementById('currentTime').innerText = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
+    // Today's high/low
+    const next24 = data.list.slice(0, 8);
+    const highs = next24.map(i => i.main.temp_max);
+    const lows = next24.map(i => i.main.temp_min);
+    document.getElementById('currentHigh').innerText = Math.round(Math.max(...highs));
+    document.getElementById('currentLow').innerText = Math.round(Math.min(...lows));
+
+    // Hourly forecast (top right)
+    const intervalDiv = document.getElementById('intervalsContainer');
+    intervalDiv.innerHTML = '';
+
+    // Alert for bad weather
+    let alert = "Clear conditions expected.";
+    const bad = data.list.slice(0, 6).find(i => i.weather[0].main === "Rain" || i.weather[0].main === "Thunderstorm");
+    if (bad) {
+        const time = new Date(bad.dt * 1000);
+        alert = `${bad.weather[0].description.charAt(0).toUpperCase() + bad.weather[0].description.slice(1)} expected around ${time.toLocaleTimeString([],{hour:'2-digit', minute:'2-digit'})}`;
+    }
+    document.getElementById('intervalAlert').innerText = alert;
+}
