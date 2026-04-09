@@ -13,7 +13,6 @@ This project demonstrates core JavaScript concepts including API integration, dy
 # 🎯 Objectives
 - Fetch and display real-time weather data using a public API
 - Implement search, filtering, and sorting using JavaScript
-- Display location on an interactive map
 - Build a responsive and user-friendly interface
 
 ---
@@ -26,9 +25,7 @@ This project demonstrates core JavaScript concepts including API integration, dy
 - Temperature (°C)
 - Weather conditions (Clear, Rain, Clouds, etc.)
 - Humidity and wind speed
-# 🗺️ Map Integration
-- Interactive map 
-- Display searched location with marker
+
 # 📊 Data Handling
 - Search using `.filter()`
 - Sorting using `.sort()`

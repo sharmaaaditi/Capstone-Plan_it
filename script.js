@@ -1,10 +1,8 @@
-// Get HTML elements
 const cityInput = document.getElementById('cityInput');
 const searchBtn = document.getElementById('searchBtn');
 const errorMsg = document.getElementById('errorMsg');
 const mainContent = document.getElementById('mainContent');
 
-// Event listeners
 searchBtn.addEventListener('click', handleSearch);
 cityInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') handleSearch();
@@ -32,7 +30,6 @@ async function fetchWeatherData(city) {
 }
 
 function displayWeather(data) {
-    // Current weather (left panel)
     const current = data.list[0];
     document.getElementById('cityName').innerText = data.city.name;
     document.getElementById('currentTemp').innerText = `${Math.round(current.main.temp)}°C`;
@@ -40,18 +37,15 @@ function displayWeather(data) {
     document.getElementById('currentDesc').innerText = current.weather[0].description;
     document.getElementById('currentTime').innerText = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
-    // Today's high/low
     const next24 = data.list.slice(0, 8);
     const highs = next24.map(i => i.main.temp_max);
     const lows = next24.map(i => i.main.temp_min);
     document.getElementById('currentHigh').innerText = Math.round(Math.max(...highs));
     document.getElementById('currentLow').innerText = Math.round(Math.min(...lows));
 
-    // Hourly forecast (top right)
     const intervalDiv = document.getElementById('intervalsContainer');
     intervalDiv.innerHTML = '';
 
-    // Alert for bad weather
     let alert = "Clear conditions expected.";
     const bad = data.list.slice(0, 6).find(i => i.weather[0].main === "Rain" || i.weather[0].main === "Thunderstorm");
     if (bad) {
@@ -60,7 +54,6 @@ function displayWeather(data) {
     }
     document.getElementById('intervalAlert').innerText = alert;
 
-    // Create hourly items
     for (let i = 0; i < 6; i++) {
         const item = data.list[i];
         const time = new Date(item.dt * 1000);
@@ -71,11 +64,9 @@ function displayWeather(data) {
         intervalDiv.appendChild(div);
     }
 
-    // 5-day forecast (bottom right)
     const dailyDiv = document.getElementById('dailyContainer');
     dailyDiv.innerHTML = '';
 
-    // Group by day
     const daily = {};
     data.list.forEach(item => {
         const date = item.dt_txt.split(' ')[0];
@@ -89,7 +80,6 @@ function displayWeather(data) {
 
     const days = Object.keys(daily).slice(0, 5);
 
-    // Overall min/max for bars
     let minAll = 100, maxAll = -100;
     days.forEach(d => {
         minAll = Math.min(minAll, daily[d].min);
@@ -97,7 +87,6 @@ function displayWeather(data) {
     });
     const range = maxAll - minAll || 1;
 
-    // Create rows
     days.forEach((date, idx) => {
         const info = daily[date];
         const minT = Math.round(info.min);

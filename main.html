@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan IT - Weather & Travel Explorer</title>
-    <!-- CSS -->
+    
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <!-- Search Section -->
+    
     <div class="search-top">
-        <input type="text" id="cityInput" placeholder="Enter a city name (e.g. London)..." />
+        <input type="text" id="cityInput" placeholder="Enter a city name (e.g. Delhi )" />
         <button id="searchBtn">Search</button>
         <p id="errorMsg" class="error hidden">City not found. Please try again.</p>
     </div>
 
-    <!-- Main Content Area -->
+    
     <main id="mainContent" class="hidden glass-container">
         
-        <!-- Left Panel: Current Weather -->
+        
         <div class="left-panel">
             <div class="current-weather">
                 <div class="temp-section">
@@ -33,29 +33,29 @@
             </div>
         </div>
 
-        <!-- Right Panel: Forecasts -->
+        
         <div class="right-panel">
             
-            <!-- Hourly / Intervals Widget -->
+            
             <div class="glass-box intervals-widget">
                 <p id="intervalAlert" class="alert-text">Forecast coming up</p>
                 <div class="intervals-list" id="intervalsContainer">
-                    <!-- JavaScript injected hourly data -->
+                    
                 </div>
             </div>
 
-            <!-- 5-Day Forecast Widget -->
+            
             <div class="glass-box daily-widget">
                 <p class="widget-title">5-Day Forecast</p>
                 <div class="daily-list" id="dailyContainer">
-                    <!-- JavaScript injected daily rows -->
+                    
                 </div>
             </div>
 
         </div>
     </main>
 
-    <!-- JavaScript -->
+   
     <script src="config.js"></script>
     <script src="script.js"></script>
 </body>

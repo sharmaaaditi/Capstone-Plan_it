@@ -1,4 +1,4 @@
-/* Reset */
+
 * {
     margin: 0;
     padding: 0;
@@ -16,7 +16,7 @@ body {
     flex-direction: column;
 }
 
-/* Nav */
+
 .glass-nav {
     display: flex;
     justify-content: space-between;
@@ -50,7 +50,7 @@ body {
     box-shadow: 0 5px 15px rgba(0,242,254,0.3);
 }
 
-/* Hero */
+
 .hero {
     flex: 1;
     display: flex;
@@ -89,7 +89,7 @@ body {
     margin-right: auto;
 }
 
-/* Buttons */
+
 .cta-buttons {
     display: flex;
     gap: 20px;
@@ -131,7 +131,7 @@ body {
     border-color: rgba(255,255,255,0.6);
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
     .glass-hero-box h1 { font-size: 3rem; }
     .cta-buttons { flex-direction: column; }
