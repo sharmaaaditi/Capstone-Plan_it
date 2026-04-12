@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -149,4 +148,25 @@ body {
     .search-top { flex-direction: column; align-items: center; }
     .search-top input, .search-top button { width: 100%; max-width: 400px; }
     #currentTemp { font-size: 6rem; }
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.filter-btn {
+    flex: 1;
+    padding: 6px 0;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+    text-align: center;
+}
+.filter-btn.active, .filter-btn:hover {
+    background: rgba(255,255,255,0.3);
 }
