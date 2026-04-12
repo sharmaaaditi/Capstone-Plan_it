@@ -12,7 +12,9 @@
     <div class="search-top">
         <input type="text" id="cityInput" placeholder="Enter a city name (e.g. Delhi )" />
         <button id="searchBtn">Search</button>
-        <p id="errorMsg" class="error hidden">City not found. Please try again.</p>
+    </div>
+    <div id="errorAlert" class="error-alert hidden">
+        <p>⚠️ City not found. Please try again.</p>
     </div>
 
     
@@ -39,6 +41,12 @@
             
             <div class="glass-box intervals-widget">
                 <p id="intervalAlert" class="alert-text">Forecast coming up</p>
+                <div id="filterButtons" class="filter-buttons">
+                    <button data-type="all" class="filter-btn active">All</button>
+                    <button data-type="hot" class="filter-btn">Hot</button>
+                    <button data-type="cold" class="filter-btn">Cold</button>
+                    <button data-type="rainy" class="filter-btn">Rainy</button>
+                </div>
                 <div class="intervals-list" id="intervalsContainer">
                     
                 </div>
