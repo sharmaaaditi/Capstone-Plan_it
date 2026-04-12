@@ -1,12 +1,11 @@
 # Capstone-Plan_it
-A web app to search locations and display real-time weather data with interactive maps.
+A web app to search locations and display real-time weather data .
 
 
 #🌦️ Travel Search & Weather Explorer
 # 📌 Project Description
-Travel Search & Weather Explorer is a web-based application that allows users to search for any city or location and view real-time weather information along with basic location details on an interactive map.
-The application integrates the Map API to fetch live weather data and uses Map API to display the selected location visually. It provides key details such as temperature, weather conditions, humidity, and wind speed in a clean and user-friendly interface.
-
+Plan IT is a web-based application that allows users to search for any city and view real-time weather information.
+The application integrates the OpenWeather API to fetch live weather data and displays key details such as temperature and weather conditions in a clean and user-friendly dashboard.
 This project demonstrates core JavaScript concepts including API integration, dynamic UI updates, and the use of array higher-order functions.
 
 ---
@@ -20,11 +19,13 @@ This project demonstrates core JavaScript concepts including API integration, dy
 # 🚀 Features
 # 🔍 Search Functionality
 - Search for any city or location
-- Dynamic results displayed instantly
+- Instant results display
 # 🌦️ Weather Information
 - Temperature (°C)
 - Weather conditions (Clear, Rain, Clouds, etc.)
-- Humidity and wind speed
+- Hourly forecast
+- 5-day forecast
+
 
 # 📊 Data Handling
 - Search using `.filter()`
@@ -32,18 +33,17 @@ This project demonstrates core JavaScript concepts including API integration, dy
 - Rendering using `.map()`
 # 🎨 UI Features
 - Responsive design (mobile, tablet, desktop)
-- Clean card-based layout
 - Loading indicator during API calls
 
 ---
 # 🌐 APIs Used
-- OpenWeather
+- OpenWeather API
 
 ---
 
 # 🛠️ Technologies Used
 - HTML
-- CSS / Tailwind CSS 
+- CSS 
 - JavaScript (ES6)
 - Fetch API
   
