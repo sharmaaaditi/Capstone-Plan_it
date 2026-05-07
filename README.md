@@ -41,6 +41,17 @@ This project demonstrates core JavaScript concepts including API integration, dy
 
 ---
 
+# Vercel Setup
+Add this environment variable in Vercel Project Settings before redeploying:
+
+```env
+OPENWEATHER_API_KEY=your_openweather_api_key_here
+```
+
+The frontend calls `/api/weather`, and the Vercel function uses this key to fetch data from OpenWeather.
+
+---
+
 # 🛠️ Technologies Used
 - HTML
 - CSS 

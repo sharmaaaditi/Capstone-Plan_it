@@ -1,30 +1,72 @@
 let currentForecast = [];
 let recents = JSON.parse(localStorage.getItem('recents')) || [];
+
+const cityInput = document.getElementById('cityInput');
+const searchBtn = document.getElementById('searchBtn');
+const errorAlert = document.getElementById('errorAlert');
+const errorMessage = document.getElementById('errorMessage');
+const mainContent = document.getElementById('mainContent');
+
 async function handleSearch(presetCity) {
-    let city = presetCity || document.getElementById('cityInput').value.trim();
+    let city = (presetCity || cityInput.value).trim();
     if (city === '') return;
+
+    setLoading(true);
+
     try {
-        let url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`;
-        let response = await fetch(url);
+        let data = await fetchForecast(city);
         
-        if (response.ok === false) throw new Error('City not found');
-        
-        let data = await response.json();
-        
-        document.getElementById('errorAlert').classList.add('hidden');
-        document.getElementById('mainContent').classList.remove('hidden');
+        errorAlert.classList.add('hidden');
+        mainContent.classList.remove('hidden');
         
         displayWeather(data);
-        addRecent(data.city.name);
+        addRecent(data.city.name || city);
     } catch (error) {
-        document.getElementById('errorAlert').classList.remove('hidden');
-        document.getElementById('mainContent').classList.add('hidden');
+        showError(error.message);
+    } finally {
+        setLoading(false);
     }
 }
-document.getElementById('searchBtn').addEventListener('click', function() { 
+
+async function fetchForecast(city) {
+    let response;
+
+    try {
+        response = await fetch(`/api/weather?city=${encodeURIComponent(city)}`);
+    } catch (error) {
+        throw new Error('Weather service unavailable. Please try again later.');
+    }
+
+    let data = await response.json().catch(function() {
+        return {};
+    });
+
+    if (response.ok === false) {
+        throw new Error(data.message || 'City not found. Please try again.');
+    }
+
+    if (!data || !Array.isArray(data.list) || data.list.length === 0) {
+        throw new Error('No forecast found for this city. Please try again.');
+    }
+
+    return data;
+}
+
+function showError(message) {
+    errorMessage.innerText = message || 'City not found. Please try again.';
+    errorAlert.classList.remove('hidden');
+    mainContent.classList.add('hidden');
+}
+
+function setLoading(isLoading) {
+    searchBtn.disabled = isLoading;
+    searchBtn.innerText = isLoading ? 'Searching...' : 'Search';
+}
+
+searchBtn.addEventListener('click', function() {
     handleSearch(); 
 });
-document.getElementById('cityInput').addEventListener('keypress', function(event) {
+cityInput.addEventListener('keypress', function(event) {
     if (event.key === 'Enter') handleSearch();
 });
 let filterButtons = document.querySelectorAll('.filter-btn');
@@ -153,7 +195,7 @@ function drawRecents() {
 }
 
 window.searchAgain = function(city) { 
-    document.getElementById('cityInput').value = city; 
+    cityInput.value = city;
     handleSearch(city); 
 };
 
